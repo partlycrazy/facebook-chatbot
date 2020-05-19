@@ -1,0 +1,81 @@
+<div class='side-bar col-sm-4 bg-secondary'>
+    <div class='container border-bottom border-white pb-5'>
+        Flow Editor
+        <div class="bg-white">
+            <div class="d-block border-bottom border-secondary mb-3">
+                <label for="flowName" class='w-25'>Flow Name</label>
+                <input class='w-75' autocomplete='off' type="text" name="flowName" [(ngModel)]="flowName">
+            </div>
+            <mat-form-field class='d-block'>
+                <mat-chip-list #chipList>
+                    <mat-chip *ngFor="let keyword of flowKeywords" [selectable]="selectable" [removable]="removable"
+                        (removed)="removeKeyword(keyword)">
+                        {{keyword}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Keywords..." [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="addKeyword($event)" autocomplete='off'>
+                </mat-chip-list>
+            </mat-form-field>
+        </div>
+    </div>
+    <div cdkDropList class='container border-bottom border-white py-5 drag-list' #container
+        (cdkDropListDropped)="drop($event)">
+
+        <!-- Textbox Content -->
+        <ng-container *ngFor='let item of flowContents'>
+            <ng-container *ngIf="item.type == 'text'">
+                <div class='d-flex drag-box' id={{item.id}} cdkDrag cdkDragLockAxis="y">
+                    <div class='border border-white w-75 mx-auto my-3 bg-white rounded'>
+                        <div>
+                            <div class='border-bottom border-primary'>
+                                <div class='input-box' contenteditable="true" [(ngModel)]="item.content['text']">
+                                </div>
+                            </div>
+                            <div class='text-center' *ngFor="let button of item.content['button']">
+                                <div class="d-block w-100 btn text-dark">
+                                    {{button.name}}
+                                </div>
+                            </div>
+                            <div class='w-100' *ngIf="item.content['button'].length < 3">
+                                <div class='d-block text-center btn w-100 border-primary' (click)="addButton($event)"
+                                    id={{item.id}}>Add Button [No Function]</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-bar">
+                        <div class="close my-3 cursor" (click)="deleteFlowContent($event)" id={{item.id}}>X</div>
+                        <div class="example-handle" cdkDragHandle>
+                            <svg width="24px" fill="#fff" viewBox="0 0 24 24">
+                                <path
+                                    d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z">
+                                </path>
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+    <div class='container input-button py-5'>
+        <div class='btn btn-outline-primary' (click)="appendFlowContent('text')">+Text</div>
+        <div class='btn btn-outline-primary' (click)="appendFlowContent('image')">TODO +Image</div>
+        <div class='btn btn-outline-primary'>TODO +Card</div>
+        <div class='btn btn-outline-primary'>TODO +Gallery</div>
+        <div class='btn btn-outline-primary'>TODO +OTNR</div>
+        <div class='btn btn-outline-primary'>TODO +List</div>
+        <div class='btn btn-outline-primary'>TODO +Audio</div>
+        <div class='btn btn-outline-primary'>TODO +Video</div>
+        <div class='btn btn-outline-primary'>TODO +File</div>
+        <div class='btn btn-outline-primary'>TODO +Delay</div>
+        <div class='btn btn-outline-primary'>TODO+UserInput</div>
+        <div class='btn btn-outline-primary'>TODO +Dynamic</div>
+    </div>
+    <div class='container input-button-small text-center'>
+        <button class='btn btn-success' (click)="save()">Save</button>
+        <button class='btn btn-warning' (click)="goBack()">Return</button>
+    </div>
+</div>

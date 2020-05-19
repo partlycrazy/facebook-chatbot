@@ -1,0 +1,30 @@
+.button {
+    cursor: pointer;    
+}
+
+.button:hover {
+    background-color: #f6f7f9;
+}
+
+a {
+    text-decoration: none;
+    outline: 0;
+    color: inherit;
+    z-index: 1;
+}
+
+.border-bottom-gray {
+    border-bottom: 1px solid #e1e5ea;
+}
+
+.border-gray {
+    border: 1px solid #e1e5ea;
+}
+
+.input-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }

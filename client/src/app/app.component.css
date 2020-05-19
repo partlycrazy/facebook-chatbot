@@ -1,0 +1,9 @@
+.wrapper {
+    max-width: 250px;
+}
+
+#sidebar {
+    height: 100vh;
+    max-width: 250px;
+    padding: 0
+}

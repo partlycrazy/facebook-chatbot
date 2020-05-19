@@ -1,0 +1,10 @@
+<div class="text-center button-middle">
+    <div mat-dialog-content>
+        <p>Are you sure you want to delete?</p>
+        <p> {{data.name}}</p>
+    </div>
+    <div mat-dialog-actions class='input-button'>
+        <button mat-raised-button color="warn" cdkFocusInitial [mat-dialog-close]="!data.delete">Yes</button>
+        <button mat-raised-button color="primary" (click)="onNoClick()">No</button>
+    </div>
+</div>
