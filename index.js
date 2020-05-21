@@ -100,7 +100,7 @@ app.post('/webhook', (req, res) => {
 
 
       if (webhook_event.message) {
-        if (userStauts !== "default") {
+        if (userStatus !== "default") {
           handleUserInput(sender_psid, webhook_event.message, userStatus)
         } else {
           handleMessage(sender_psid, webhook_event.message);
